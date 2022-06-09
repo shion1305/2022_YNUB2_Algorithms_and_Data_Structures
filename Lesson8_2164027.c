@@ -117,49 +117,46 @@ void quicksort(int left, int right) {
         if (i < right) quicksort(i, right);
     }
 }
+
 /*
  * コード編集はmerge_sort内のみで行った。
+ * 今回の問題では
+ * 「２つのデータをそれぞれ配列に読み込んでし
+ * まってから行うことはダメとします」
+ * と指定がある事に注意する。
  */
 void merge_sort(char f1[], char f2[], char f3[]) {
-    //retrieve data
-    read_data(f1);
-    int d1[N2];
-    for (int i = 0; i < N2; ++i) {
-        d1[i] = data[i];
-    }
-    read_data(f2);
-    int d2[N2];
-    for (int i = 0; i < N2; ++i) {
-        d2[i] = data[i];
-    }
-    //finished retrieving data
 
-    FILE *fp = fopen(f3, "w");
-
-    //merge sorting starts from here
-    int p1 = 0, p2 = 0, flag = 1;
-    while (p1 < N2 && p2 < N2) {
-        if (d1[p1] < d2[p2]) {
-            fprintf(fp, "%4d", d1[p1++]);
+    printf( "out%s", f3);
+    //prepare outlet.
+    FILE *fw = fopen(f3, "w");
+    FILE *fr1 = fopen(f1, "r");
+    FILE *fr2 = fopen(f2, "r");
+    int v1, v2;
+    int s1 = fscanf(fr1, "%d", &v1);
+    int s2 = fscanf(fr2, "%d", &v2);
+    int counter = 0;
+    while (s1 != EOF && s2 != EOF) {
+        if (s1 < s2) {
+            fprintf(fw, "%4d", v1);
+            s1 = fscanf(fr1, "%d", &v1);
         } else {
-            fprintf(fp, "%4d", d2[p2++]);
+            //assert s1!=s2
+            fprintf(fw, "%4d", v2);
+            s2 = fscanf(fr2, "%d", &v2);
         }
-        if (flag++ % 10 == 0) {
-            fprintf(fp, "\n");
-        }
-    }
+        if (++counter % 10 == 0) fprintf(fw, "\n");
+    };
+    //merge sorting starts from here
+
     //process for remaining data starts from
-    while (p1 < N2) {
-        fprintf(fp, "%4d", f1[p1++]);
-        if (flag++ % 10 == 0) {
-            fprintf(fp, "\n");
-        }
+    while (s1 != EOF) {
+        fprintf(fr1, "%4d", v1);
+        s1 = fscanf(fr1, "%d", &v1);
     }
-    while (p2 < N2) {
-        fprintf(fp, "%4d", f2[p2++]);
-        if (flag++ % 10 == 0) {
-            fprintf(fp, "\n");
-        }
+    while (s2 != EOF) {
+        fprintf(fr2, "%4d", v2);
+        s2 = fscanf(fr2, "%d", &v2);
     }
     //process for remaining data ends here
 }
