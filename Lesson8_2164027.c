@@ -159,4 +159,7 @@ void merge_sort(char f1[], char f2[], char f3[]) {
         s2 = fscanf(fr2, "%d", &v2);
     }
     //process for remaining data ends here
+    fclose(fw);
+    fclose(fr1);
+    fclose(fr2);
 }
