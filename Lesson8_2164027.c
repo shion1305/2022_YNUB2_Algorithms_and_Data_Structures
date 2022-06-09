@@ -61,7 +61,7 @@ void make_rand_data(void) {
 
     for (i = 0; i < N2; i++) {
         do {
-            n = rand() % N1 + 1;
+            n = rand() % N1;
         } while (flag[n] != 0);
         flag[n] = 1;
         data[i] = n;
@@ -127,7 +127,7 @@ void quicksort(int left, int right) {
  */
 void merge_sort(char f1[], char f2[], char f3[]) {
 
-    printf( "out%s", f3);
+    printf("out%s", f3);
     //prepare outlet.
     FILE *fw = fopen(f3, "w");
     FILE *fr1 = fopen(f1, "r");
