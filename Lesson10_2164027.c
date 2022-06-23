@@ -81,7 +81,7 @@ void trace(int data[N][N], int route[N][N], int step, int x, int y) {
 int process(int data[N][N], point start, point goal) {
     int route[N][N] = {{0,},};
     countStep(start.x, start.y, 1, data, route);
-    printf("ステップ数: %d", route[goal.x][goal.y]);
+    printf("ステップ数: %d\n", route[goal.x][goal.y]);
     trace(data, route, route[goal.x][goal.y], goal.x, goal.y);
     for (int i = 0; i < 10; ++i) {
         for (int j = 0; j < 10; ++j) {
